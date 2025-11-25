@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${edit} ? 'Edit Dish' : 'Add Dish'">Dish Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 300px;
+      padding: 5px;
+      margin-top: 3px;
+      display: block;
+    }
+
+    .form-buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 7px 15px;
+      margin-right: 10px;
+      border: 1px solid #333;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+
+  </style>
+</head>
+<body>
+<h2 th:text="${edit} ? 'Edit Dish' : 'Add Dish'"></h2>
+
+<!-- EDIT FORM -->
+<form th:if="${edit}" th:action="@{'/dishes/edit/' + ${dish.id}}" method="post">
+  <label>Dish ID:</label>
+  <input type="text" name="dishId" th:value="${dish.dishId}"/>
+
+  <label>Name:</label>
+  <input type="text" name="name" th:value="${dish.name}"/>
+
+  <label>Cuisine:</label>
+  <input type="text" name="cuisine" th:value="${dish.cuisine}"/>
+
+  <label>Preparation Time:</label>
+  <input type="number" name="preparationTime" th:value="${dish.preparationTime}"/>
+
+  <div class="form-buttons">
+    <button type="submit">Save</button>
+    <a th:href="@{/dishes}" class="back-button"><button type="button">Back</button></a>
+  </div>
+</form>
+
+<!-- ADD FORM -->
+<form th:if="${!edit}" th:action="@{/dishes/add}" method="post">
+  <label>Dish ID:</label>
+  <input type="text" name="dishId"/>
+
+  <label>Name:</label>
+  <input type="text" name="name"/>
+
+  <label>Cuisine:</label>
+  <input type="text" name="cuisine"/>
+
+  <label>Preparation Time:</label>
+  <input type="number" name="preparationTime"/>
+
+  <div class="form-buttons">
+    <button type="submit">Save</button>
+    <a th:href="@{/dishes}" class="back-button"><button type="button">Back</button></a>
+  </div>
+</form>
+
+</body>
+</html>
